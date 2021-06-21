@@ -1,0 +1,15 @@
+-- Question 1 
+SELECT COUNT(CountryCode) from city WHERE CountryCode = 'USA'; 
+-- Question 2
+SELECT population, LifeExpectancy FROM country WHERE name = 'Argentina';
+-- Question 3
+SELECT name FROM country
+WHERE LifeExpectancy = (SELECT MAX(LifeExpectancy) 
+FROM country LifeExpectancy 
+ORDER BY LifeExpectancy IS NOT NULL LIMIT 1);
+-- Question 4
+SELECT c.Name FROM city c JOIN country co ON c.ID=co.Capital WHERE co.Name='Spain';
+-- Question 5
+
+-- Question 6
+SELECT NAME FROM city WHERE NAME LIKE 'f%' ORDER BY NAME ASC LIMIT 25;
