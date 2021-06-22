@@ -1,0 +1,83 @@
+Sakila DB Answers:
+
+-- Question 1
+SELECT first_name from actor;
+
+-- Question 2
+SELECT * FROM actor WHERE first_name='John';
+
+-- Question 3
+SELECT * FROM actor WHERE last_name='Neeson';
+
+-- Question 4
+SELECT * FROM actor WHERE actor_id % 10 = 0;
+
+-- Question 5
+SELECT description FROM film WHERE film_id = 100;
+
+-- Question 6
+SELECT * FROM film WHERE rating = 'R';
+
+-- Question 7
+SELECT * FROM film WHERE rating != 'R';
+
+-- Question 8
+SELECT * FROM film WHERE length IS NOT NULL AND Length != 0 ORDER BY length ASC LIMIT 10;
+
+-- Question 9
+SELECT * FROM film order by length DESC;
+
+-- Question 10
+SELECT * FROM film WHERE special_features LIKE '%Deleted Scenes%';
+
+-- Question 11
+SELECT last_name, COUNT(last_name) FROM actor GROUP BY last_name HAVING COUNT(last_name) = 1 ORDER BY last_name DESC;
+
+-- Question 12
+SELECT last_name, COUNT(last_name) FROM actor GROUP BY last_name HAVING COUNT(last_name) >1 ORDER BY COUNT(last_name) DESC;
+
+-- Question 13 Which actor has appeared in the most films?
+SELECT film_actor.actor_id, COUNT(actor_id) as film_count
+from film_actor JOIN film USING (film_id) GROUP BY actor_id
+ORDER BY film_count DESC LIMIT 1;
+
+-- Question 14 When is 'Academy Dinosaur' due?
+
+-- Question 15
+SELECT avg(length) FROM film;
+
+-- Question 16
+SELECT category.name, avg(length)
+FROM film JOIN film_category USING (film_id) 
+JOIN category USING (category_id)
+GROUP BY category.name
+ORDER BY avg(length) DESC;
+
+-- Question 17
+SELECT title FROM film WHERE description LIKE '%robot%';
+
+-- Question 18
+SELECT * FROM film WHERE release_year=2010;
+
+-- Question 19
+SELECT * FROM film_list WHERE category ='Horror';
+
+-- Question 20
+SELECT first_name, last_name, staff_id FROM staff WHERE staff_id =2;
+
+-- Question 21
+SELECT * FROM film_list WHERE actors LIKE '%Fred Costner%';
+
+-- Question 22
+SELECT DISTINCT * FROM country;
+
+-- Question 23
+SELECT * FROM language ORDER BY name DESC;
+
+-- Question 24 
+SELECT first_name, last_name FROM actor WHERE last_name LIKE'%son%' ORDER BY first_name DESC;
+
+-- Question 25 Which category contains the most films?
+SELECT category.category_id, category.name, COUNT(category_id) as cat_count
+FROM category JOIN film_category USING (category_id)
+GROUP BY category_id ORDER BY cat_count DESC LIMIT 1;
